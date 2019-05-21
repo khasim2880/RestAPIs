@@ -17,6 +17,6 @@ app.use(function(req, res, next) {
 
 app.use(require('./controllers'));
 
-app.listen(1330, function(){
+app.listen(process.env.PORT || 1330, function(){
     console.log('App running on 1330');
 });

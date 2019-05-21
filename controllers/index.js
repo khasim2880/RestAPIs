@@ -3,6 +3,7 @@ var router = express.Router();
 let verifyToken = require('../middlewares/verifyToken');
 
 router.use('/', require('./user'));
-router.use('/users', verifyToken, require('./users'));
+router.use('/categories', verifyToken, require('./categories'));
+router.use('/products', verifyToken, require('./products'));
 
 module.exports = router;

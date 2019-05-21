@@ -1,14 +1,14 @@
 let express = require('express');
 let router = express.Router();
-let User = require('../models/user');
+let Category = require('../models/category');
 
 router.get('/', function(req, res){
     if(req.decoded){
-        User.find().lean().exec(function(error, users){
+        Category.find().lean().exec(function(error, categories){
             if(error) {
-                res.json({error: false});
+                res.json({error: true});
             }
-            res.json(users);
+            res.json(categories);
         });
     }
 });

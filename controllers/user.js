@@ -31,9 +31,14 @@ router.post('/authenticate', function(req, res){
         let token = jwt.sign(user, global.config.jwt_secret, {
             expiresIn: 120 // expires in 5 minute
         });
-        res.cookie["Authorization"] = "Bearer "+token;
+        res.cookie["Authorization"] = "Bearer " + token;
         res.json({error:false, token: token});
     })
+});
+
+router.get('/logout', function(req, res){
+    res.cookie["Authorization"] = null;
+    res.json({error: false});
 });
 
 module.exports = router;

@@ -10,5 +10,13 @@ module.exports = mongoose.model('users', new Schema({
         type: String,
         required: true
     },
-    token: String
+    token: String,
+    fromName: {
+        type: String,
+        required: false
+    },
+    toName: {
+        type: String,
+        required: false
+    }
 }));

@@ -29,16 +29,36 @@ router.post('/authenticate', function(req, res){
             return res.status(404).json({'message':'User not found!'});
         }
         let token = jwt.sign(user, global.config.jwt_secret, {
-            expiresIn: 120 // expires in 5 minute
+            expiresIn: 720 // expires in 30 minutes
         });
-        res.cookie["Authorization"] = "Bearer " + token;
-        res.json({error:false, token: token});
+        //res.cookie["Authorization"] = "Bearer " + token;
+        res.json({error:false, token: "Bearer "+ token, name: user.name});
+    })
+});
+
+router.get('/allusers', function(req, res){
+    User.find({}).lean().exec(function(err, user){
+        if(err){
+            return res.json({error: true});
+        }
+        if(!user){
+            return res.status(404).json({'message':'Users not found!'});
+        }
+        res.json({error:false, users: user});
     })
 });
 
 router.get('/logout', function(req, res){
-    res.cookie["Authorization"] = null;
+    //res.cookie["Authorization"] = null;
     res.json({error: false});
+});
+
+router.get('/', function(req, res){
+    if(req.decoded){
+        res.json({error: false, user: req.decoded.name});
+    }else{
+        res.json({error: true});
+    }
 });
 
 module.exports = router;

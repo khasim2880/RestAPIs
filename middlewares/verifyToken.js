@@ -1,7 +1,7 @@
 var jwt = require('jsonwebtoken');
 
 module.exports = function(req,res,next) {
-    var token = res.cookie.Authorization;
+    var token = req.headers.authorization;
     if (token) {
         token = token.replace("Bearer ", "");
         // verifies secret and checks exp

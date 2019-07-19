@@ -31,7 +31,6 @@ router.post('/deleteall', function(req, res){
 
 router.post('/get', function(req, res){
     if(req.decoded){
-        console.log("--");
         var dat = {
             $or: [
                 {
